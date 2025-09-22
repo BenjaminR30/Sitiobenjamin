@@ -296,3 +296,45 @@ body.dark-mode .tarjeta::after {
         font-size: 0.9em;
     }
 }
+
+/* ======================= */
+/* Footer de contacto (fijo, info) */
+/* ======================= */
+footer {
+    margin-top: 4em;
+    padding: 2em;
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    border-top: 2px solid aquamarine;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
+}
+
+footer h2 {
+    font-family: 'Space Mono', monospace;
+    color: aquamarine;
+    margin-bottom: 1em;
+    text-shadow: 0 0 10px aquamarine;
+}
+
+footer p {
+    margin: 0.5em 0;
+    color: #f0f0f0;
+    font-size: 1em;
+}
+
+/* Footer en Modo Oscuro */
+body.dark-mode footer {
+    background: rgba(255, 255, 255, 0.05);
+    border-top: 2px solid #0ff;
+    box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.3);
+}
+
+body.dark-mode footer h2 {
+    color: #0ff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #09f;
+}
+
+body.dark-mode footer p {
+    color: #dcdcdc;
+}
