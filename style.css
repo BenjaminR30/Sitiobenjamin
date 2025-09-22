@@ -1,0 +1,298 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+/* Fondo psicodélico animado */
+body {
+    margin: 0;
+    padding: 2em;
+    background: linear-gradient(135deg, #2e0249, #570a57, #a91079, #7fffd4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite alternate;
+    font-family: 'Open Sans', sans-serif;
+    color: #f0f0f0;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 100%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 0%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Encabezados */
+h1, h2 {
+    font-family: 'Space Mono', monospace;
+    color: aquamarine;
+    text-align: center;
+}
+
+h3 {
+    font-size: 1em;
+    text-align: center;
+}
+
+/* Botón de cambio de tema */
+#toggle-theme {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    background: rgba(0,0,0,0.4);
+    color: aquamarine;
+    box-shadow: 0 0 10px aquamarine;
+    transition: all 0.3s ease;
+}
+
+#toggle-theme:hover {
+    background: rgba(127,255,212,0.2);
+    transform: scale(1.1);
+}
+
+/* Contenedor principal en columna */
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3em;
+    text-align: center;
+}
+
+/* Intro centrado */
+.intro {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro p {
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* Botón moderno */
+.intro a {
+    align-self: center;
+    margin-top: 2em;
+}
+
+.intro button {
+    font-family: 'Space Mono', monospace;
+    font-size: 1em;
+    padding: 15px 45px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    background: linear-gradient(90deg, #6a0dad, #a91079, #7fffd4);
+    background-size: 300% 300%;
+    color: white;
+    box-shadow: 0 0 15px rgba(127,255,212,0.6);
+    transition: all 0.4s ease;
+    animation: gradientButton 6s ease infinite alternate;
+}
+
+@keyframes gradientButton {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
+.intro button:hover {
+    animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); box-shadow: 0 0 15px aquamarine; }
+    50% { transform: scale(1.1); box-shadow: 0 0 30px aquamarine; }
+    100% { transform: scale(1); box-shadow: 0 0 15px aquamarine; }
+}
+
+/* Proyectos */
+.proyectos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Galería de tarjetas */
+.galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5em;
+    width: 100%;
+    max-width: 1100px;
+}
+
+/* Tarjetas */
+.tarjeta {
+    position: relative;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    backdrop-filter: blur(12px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Overlay hover */
+.tarjeta::after {
+    content: "Ver proyecto";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: aquamarine;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Space Mono', monospace;
+    font-size: 1.1em;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: scale(0.95);
+    border-radius: 12px;
+    pointer-events: none;
+}
+
+.tarjeta:hover::after {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.tarjeta a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.tarjeta img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px 12px 0 0;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.tarjeta:hover img {
+    transform: scale(1.1);
+}
+
+.tarjeta h3 {
+    margin: 0.8em 0;
+    color: aquamarine;
+    text-shadow: 0 0 8px rgba(127,255,212,0.8);
+    transition: text-shadow 0.3s ease;
+}
+
+.tarjeta:hover h3 {
+    text-shadow: 0 0 15px aquamarine, 0 0 30px #7fffd4;
+}
+
+/* Hover tarjetas */
+.tarjeta:hover {
+    box-shadow: 0 15px 25px rgba(0,0,0,0.3), 0 0 15px aquamarine;
+}
+
+/* Animación de scroll */
+.animate {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.animate.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animación en cascada */
+.galeria .tarjeta:nth-child(1) { transition-delay: 0.1s; }
+.galeria .tarjeta:nth-child(2) { transition-delay: 0.2s; }
+.galeria .tarjeta:nth-child(3) { transition-delay: 0.3s; }
+.galeria .tarjeta:nth-child(4) { transition-delay: 0.4s; }
+.galeria .tarjeta:nth-child(5) { transition-delay: 0.5s; }
+.galeria .tarjeta:nth-child(6) { transition-delay: 0.6s; }
+.galeria .tarjeta:nth-child(7) { transition-delay: 0.7s; }
+.galeria .tarjeta:nth-child(8) { transition-delay: 0.8s; }
+
+/* Animaciones adicionales */
+h1 {
+    animation: glowText 2s infinite alternate;
+}
+
+@keyframes glowText {
+    0% { text-shadow: 0 0 5px aquamarine; }
+    100% { text-shadow: 0 0 20px #7fffd4, 0 0 30px aquamarine; }
+}
+
+/* ======================= */
+/* 🎨 Tema Oscuro Neón */
+/* ======================= */
+body.dark-mode {
+    background: linear-gradient(135deg, #0d0d0d, #1a0033, #33004d, #000000);
+    background-size: 400% 400%;
+    animation: gradientDark 20s ease infinite alternate;
+    color: #dcdcdc;
+}
+
+@keyframes gradientDark {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: #0ff;
+    text-shadow: 0 0 8px #0ff, 0 0 15px #0ff, 0 0 30px #09f;
+}
+
+body.dark-mode .intro button {
+    background: linear-gradient(90deg, #00f, #a0f, #0ff);
+    color: white;
+    box-shadow: 0 0 20px #0ff;
+}
+
+body.dark-mode .intro button:hover {
+    box-shadow: 0 0 30px #0ff, 0 0 50px #0ff;
+}
+
+body.dark-mode .tarjeta {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(0,255,255,0.2);
+    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+}
+
+body.dark-mode .tarjeta:hover {
+    box-shadow: 0 0 20px #0ff, 0 0 40px #09f;
+}
+
+body.dark-mode .tarjeta::after {
+    background: rgba(0,0,0,0.8);
+    color: #0ff;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    #container {
+        gap: 2em;
+    }
+
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .intro button {
+        padding: 12px 30px;
+        font-size: 0.9em;
+    }
+}
