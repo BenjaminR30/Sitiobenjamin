@@ -10,17 +10,56 @@
 
 <body>
 
+    <!-- Barra de navegación lateral -->
+    <nav class="sidebar">
+        <div class="sidebar-toggle">▶</div>
+        <ul>
+            <li><a href="#inicio">🏠 <span>Inicio</span></a></li>
+            <li><a href="#intro">📖 <span>Introducción</span></a></li>
+            <li><a href="#proyectos">💻 <span>Proyectos</span></a></li>
+            <li><a href="#sobre-mi">🙋 <span>Sobre mí</span></a></li>
+            <li><a href="#contacto">✉️ <span>Contacto</span></a></li>
+        </ul>
+        <!-- Botón de modo oscuro -->
+        <button id="toggle-theme">🌙</button>
+    </nav>
+
+    <!-- Portada / Carrusel -->
+    <section class="portada">
+        <div class="carrusel">
+            <div class="slide active">
+                <img src="assets/imagen1.png" alt="Imagen 1">
+            </div>
+            <div class="slide">
+                <img src="assets/imagen2.png" alt="Imagen 2">
+            </div>
+            <div class="slide">
+                <img src="assets/imagen3.png" alt="Imagen 3">
+            </div>
+
+            <!-- Controles -->
+            <button class="prev">❮</button>
+            <button class="next">❯</button>
+
+            <!-- Indicadores -->
+            <div class="indicadores">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+
     <!-- Encabezado -->
-    <header>
+    <header id="inicio">
         <h1 class="animate">Repositorio Benjamin Ramirez IE 2025</h1>
-        <button id="toggle-theme">🌙 Modo oscuro</button>
     </header>
 
     <!-- Contenedor principal -->
     <div id="container">
 
-        <!-- Lado izquierdo: introducción -->
-        <div class="intro animate">
+        <!-- Introducción -->
+        <div class="intro animate" id="intro">
             <p>
                 Imagen escrita es una asignatura que se centra en la intersección entre diseño,
                 programación y arte generativo. Utilizando p5.js como herramienta principal, el curso explora los
@@ -34,17 +73,13 @@
             </p>
 
             <a href="https://wiki.ead.pucv.cl/Sitio_Web_IE_-_Benjamin_Ramirez" target="_blank">
-                <button>
-                    Wiki del proyecto
-                </button>
+                <button>Wiki del proyecto</button>
             </a>
         </div>
 
-        <!-- Lado derecho: proyectos -->
-        <div class="proyectos animate">
+        <!-- Proyectos -->
+        <div class="proyectos animate" id="proyectos">
             <h2>Mis proyectos p5js</h2>
-
-            <!-- Galería de tarjetas -->
             <div class="galeria">
                 <div class="tarjeta animate">
                     <a href="https://editor.p5js.org/B4nj4Min/full/frTn3HPhn" target="_blank">
@@ -103,16 +138,29 @@
                 </div>
             </div>
         </div>
+
+        <!-- Sobre mí -->
+        <section class="sobre-mi animate" id="sobre-mi">
+            <h2>Sobre mí</h2>
+            <p>
+                Soy Benjamin Ramirez, estudiante de Diseño en la PUCV. Este sitio recopila mis proyectos de Imagen
+                Escrita 2025,
+                donde exploro programación creativa con p5.js y la integración de diseño visual, arte generativo e
+                inteligencia
+                artificial.
+            </p>
+        </section>
     </div>
 
-    <!-- Footer con contacto -->
-    <footer>
+    <!-- Footer -->
+    <footer id="contacto">
         <h2>Contacto</h2>
         <p><strong>Creado por:</strong> Benjamin Ramirez</p>
         <p><strong>Email:</strong> benjamin.ramirez.h@mail.pucv.com</p>
     </footer>
 
-    <!-- Vincular JS externo -->
+    <!-- Vincular JS -->
     <script src="script.js"></script>
 </body>
+
 </html>

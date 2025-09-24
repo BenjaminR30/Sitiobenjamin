@@ -1,7 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-/* Fondo psicodélico animado */
+html {
+    scroll-behavior: smooth;
+}
+
+/* ======================= */
+/* Variables + Fondo       */
+/* ======================= */
 body {
+    --sidebar-collapsed: 70px;
+    --sidebar-expanded: 220px;
+
     margin: 0;
     padding: 2em;
     background: linear-gradient(135deg, #2e0249, #570a57, #a91079, #7fffd4);
@@ -12,15 +21,32 @@ body {
 }
 
 @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    25% { background-position: 50% 100%; }
-    50% { background-position: 100% 50%; }
-    75% { background-position: 50% 0%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 50% 100%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    75% {
+        background-position: 50% 0%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
-/* Encabezados */
-h1, h2 {
+/* ======================= */
+/* Encabezados             */
+/* ======================= */
+h1,
+h2 {
     font-family: 'Space Mono', monospace;
     color: aquamarine;
     text-align: center;
@@ -31,28 +57,20 @@ h3 {
     text-align: center;
 }
 
-/* Botón de cambio de tema */
-#toggle-theme {
-    position: absolute;
-    top: 1em;
-    right: 1em;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: 'Space Mono', monospace;
-    background: rgba(0,0,0,0.4);
-    color: aquamarine;
-    box-shadow: 0 0 10px aquamarine;
-    transition: all 0.3s ease;
+/* ======================= */
+/* Layout general          */
+/* ======================= */
+header,
+#container,
+footer {
+    margin-left: var(--sidebar-collapsed);
+    transition: margin-left 0.3s ease;
 }
 
-#toggle-theme:hover {
-    background: rgba(127,255,212,0.2);
-    transform: scale(1.1);
+header {
+    position: relative;
 }
 
-/* Contenedor principal en columna */
 #container {
     display: flex;
     flex-direction: column;
@@ -61,13 +79,234 @@ h3 {
     text-align: center;
 }
 
-/* Intro centrado */
+/* ======================= */
+/* Sidebar con flecha      */
+/* ======================= */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 60px;
+    /* contraída */
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border-right: 2px solid aquamarine;
+    transition: width 0.3s ease;
+    z-index: 999;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sidebar-toggle {
+    font-size: 1.5em;
+    color: aquamarine;
+    margin: 1em 0;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    user-select: none;
+}
+
+.sidebar.expanded .sidebar-toggle,
+.sidebar:hover .sidebar-toggle {
+    transform: rotate(90deg);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 2em 0 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.sidebar ul li {
+    width: 100%;
+}
+
+.sidebar ul li a {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.95em;
+    text-decoration: none;
+    color: aquamarine;
+    padding: 0.8em;
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    white-space: nowrap;
+    transition: color 0.3s ease, text-shadow 0.3s ease, background 0.3s ease;
+}
+
+.sidebar ul li a span {
+    display: none;
+}
+
+.sidebar:hover ul li a span,
+.sidebar.expanded ul li a span {
+    display: inline;
+}
+
+.sidebar ul li a:hover {
+    color: white;
+    background: rgba(127, 255, 212, 0.1);
+    text-shadow: 0 0 10px aquamarine;
+}
+
+/* Expansión de sidebar */
+.sidebar:hover,
+.sidebar.expanded {
+    width: 200px;
+}
+
+/* Empujar contenido al expandir */
+body:has(.sidebar:hover) header,
+body:has(.sidebar:hover) #container,
+body:has(.sidebar:hover) footer,
+body:has(.sidebar.expanded) header,
+body:has(.sidebar.expanded) #container,
+body:has(.sidebar.expanded) footer {
+    margin-left: var(--sidebar-expanded);
+}
+
+/* ======================= */
+/* Botón modo oscuro (en navbar) */
+/* ======================= */
+.sidebar #toggle-theme {
+    margin: 2em auto;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-family: 'Space Mono', monospace;
+    background: rgba(0, 0, 0, 0.4);
+    color: aquamarine;
+    box-shadow: 0 0 10px aquamarine;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar #toggle-theme:hover {
+    background: rgba(127, 255, 212, 0.2);
+    transform: scale(1.1);
+}
+
+/* ======================= */
+/* Portada / Carrusel      */
+/* ======================= */
+.portada {
+    width: calc(100% - 4em);
+    /* ajusta al padding del body */
+    max-width: 1200px;
+    /* límite opcional */
+    height: 280px;
+    /* más bajo para que no sea gigante */
+    margin-left: var(--sidebar-collapsed);
+    transition: margin-left 0.3s ease;
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    margin-bottom: 2em;
+    position: relative;
+}
+
+body:has(.sidebar:hover) .portada,
+body:has(.sidebar.expanded) .portada {
+    margin-left: var(--sidebar-expanded);
+}
+
+.carrusel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Controles del carrusel */
+.prev,
+.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 50%;
+    font-size: 1.5em;
+    transition: background 0.3s ease;
+    z-index: 10;
+}
+
+.prev:hover,
+.next:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Indicadores */
+.indicadores {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.dot.active,
+.dot:hover {
+    background: aquamarine;
+}
+
+/* ======================= */
+/* Intro                   */
+/* ======================= */
 .intro {
     max-width: 800px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 .intro p {
@@ -75,9 +314,7 @@ h3 {
     line-height: 1.6;
 }
 
-/* Botón moderno */
 .intro a {
-    align-self: center;
     margin-top: 2em;
 }
 
@@ -91,14 +328,19 @@ h3 {
     background: linear-gradient(90deg, #6a0dad, #a91079, #7fffd4);
     background-size: 300% 300%;
     color: white;
-    box-shadow: 0 0 15px rgba(127,255,212,0.6);
+    box-shadow: 0 0 15px rgba(127, 255, 212, 0.6);
     transition: all 0.4s ease;
     animation: gradientButton 6s ease infinite alternate;
 }
 
 @keyframes gradientButton {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 100% 50%;
+    }
 }
 
 .intro button:hover {
@@ -106,28 +348,40 @@ h3 {
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); box-shadow: 0 0 15px aquamarine; }
-    50% { transform: scale(1.1); box-shadow: 0 0 30px aquamarine; }
-    100% { transform: scale(1); box-shadow: 0 0 15px aquamarine; }
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 15px aquamarine;
+    }
+
+    50% {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px aquamarine;
+    }
+
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px aquamarine;
+    }
 }
 
-/* Proyectos */
+/* ======================= */
+/* Proyectos y tarjetas    */
+/* ======================= */
 .proyectos {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Galería de tarjetas */
 .galeria {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 1.5em;
-    width: 100%;
     max-width: 1100px;
+    width: 100%;
 }
 
-/* Tarjetas */
+/* Tarjeta base */
 .tarjeta {
     position: relative;
     overflow: hidden;
@@ -135,18 +389,25 @@ h3 {
     border-radius: 12px;
     backdrop-filter: blur(12px);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    transform-style: preserve-3d;
-    perspective: 1000px;
+    animation: tarjetaGradient 10s ease-in-out infinite alternate;
 }
 
-/* Overlay hover */
+/* Enlace ocupa toda la tarjeta (sin subrayado azul) */
+.tarjeta a {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    z-index: 2;
+}
+
+/* Overlay NO bloquea clics */
 .tarjeta::after {
     content: "Ver proyecto";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.6);
     color: aquamarine;
     display: flex;
@@ -155,22 +416,15 @@ h3 {
     font-family: 'Space Mono', monospace;
     font-size: 1.1em;
     opacity: 0;
-    transition: opacity 0.3s ease, transform 0.3s ease;
     transform: scale(0.95);
-    border-radius: 12px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
+    z-index: 3;
 }
 
 .tarjeta:hover::after {
     opacity: 1;
     transform: scale(1);
-}
-
-.tarjeta a {
-    display: block;
-    width: 100%;
-    text-decoration: none;
-    color: inherit;
 }
 
 .tarjeta img {
@@ -188,20 +442,18 @@ h3 {
 .tarjeta h3 {
     margin: 0.8em 0;
     color: aquamarine;
-    text-shadow: 0 0 8px rgba(127,255,212,0.8);
-    transition: text-shadow 0.3s ease;
+    text-shadow: 0 0 8px rgba(127, 255, 212, 0.8);
 }
 
 .tarjeta:hover h3 {
     text-shadow: 0 0 15px aquamarine, 0 0 30px #7fffd4;
 }
 
-/* Hover tarjetas */
 .tarjeta:hover {
-    box-shadow: 0 15px 25px rgba(0,0,0,0.3), 0 0 15px aquamarine;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 0 15px aquamarine;
 }
 
-/* Animación de scroll */
+/* Aparición por scroll */
 .animate {
     opacity: 0;
     transform: translateY(30px);
@@ -213,40 +465,112 @@ h3 {
     transform: translateY(0);
 }
 
-/* Animación en cascada */
-.galeria .tarjeta:nth-child(1) { transition-delay: 0.1s; }
-.galeria .tarjeta:nth-child(2) { transition-delay: 0.2s; }
-.galeria .tarjeta:nth-child(3) { transition-delay: 0.3s; }
-.galeria .tarjeta:nth-child(4) { transition-delay: 0.4s; }
-.galeria .tarjeta:nth-child(5) { transition-delay: 0.5s; }
-.galeria .tarjeta:nth-child(6) { transition-delay: 0.6s; }
-.galeria .tarjeta:nth-child(7) { transition-delay: 0.7s; }
-.galeria .tarjeta:nth-child(8) { transition-delay: 0.8s; }
-
-/* Animaciones adicionales */
+/* Animaciones extra */
 h1 {
     animation: glowText 2s infinite alternate;
 }
 
 @keyframes glowText {
-    0% { text-shadow: 0 0 5px aquamarine; }
-    100% { text-shadow: 0 0 20px #7fffd4, 0 0 30px aquamarine; }
+    0% {
+        text-shadow: 0 0 5px aquamarine;
+    }
+
+    100% {
+        text-shadow: 0 0 20px #7fffd4, 0 0 30px aquamarine;
+    }
+}
+
+@keyframes tarjetaGradient {
+    0% {
+        background: rgba(255, 255, 255, 0.08);
+    }
+
+    25% {
+        background: rgba(127, 255, 212, 0.08);
+    }
+
+    50% {
+        background: rgba(169, 16, 121, 0.1);
+    }
+
+    75% {
+        background: rgba(106, 13, 173, 0.1);
+    }
+
+    100% {
+        background: rgba(255, 255, 255, 0.08);
+    }
 }
 
 /* ======================= */
-/* 🎨 Tema Oscuro Neón */
+/* Sección Sobre mí        */
+/* ======================= */
+.sobre-mi {
+    max-width: 800px;
+    margin: 4em auto;
+    padding: 2em;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 15px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.sobre-mi h2 {
+    font-family: 'Space Mono', monospace;
+    color: aquamarine;
+    margin-bottom: 1em;
+}
+
+.sobre-mi p {
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+
+/* ======================= */
+/* Footer                  */
+/* ======================= */
+footer {
+    margin-top: 4em;
+    padding: 2em;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-top: 2px solid aquamarine;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.3);
+}
+
+footer h2 {
+    font-family: 'Space Mono', monospace;
+    color: aquamarine;
+    margin-bottom: 1em;
+}
+
+footer p {
+    margin: 0.5em 0;
+}
+
+/* ======================= */
+/* Tema oscuro             */
 /* ======================= */
 body.dark-mode {
-    background: linear-gradient(135deg, #0d0d0d, #1a0033, #33004d, #000000);
+    background: linear-gradient(135deg, #0d0d0d, #1a0033, #33004d, #000);
     background-size: 400% 400%;
     animation: gradientDark 20s ease infinite alternate;
     color: #dcdcdc;
 }
 
 @keyframes gradientDark {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
 }
 
 body.dark-mode h1,
@@ -262,79 +586,52 @@ body.dark-mode .intro button {
     box-shadow: 0 0 20px #0ff;
 }
 
-body.dark-mode .intro button:hover {
-    box-shadow: 0 0 30px #0ff, 0 0 50px #0ff;
-}
-
 body.dark-mode .tarjeta {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(0,255,255,0.2);
-    box-shadow: 0 0 15px rgba(0,255,255,0.2);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
-body.dark-mode .tarjeta:hover {
-    box-shadow: 0 0 20px #0ff, 0 0 40px #09f;
+body.dark-mode .sobre-mi {
+    background: rgba(255, 255, 255, 0.05);
 }
 
-body.dark-mode .tarjeta::after {
-    background: rgba(0,0,0,0.8);
-    color: #0ff;
-}
-
-/* Responsive */
-@media (max-width: 900px) {
-    #container {
-        gap: 2em;
-    }
-
-    h1 {
-        font-size: 1.8em;
-    }
-
-    .intro button {
-        padding: 12px 30px;
-        font-size: 0.9em;
-    }
-}
-
-/* ======================= */
-/* Footer de contacto (fijo, info) */
-/* ======================= */
-footer {
-    margin-top: 4em;
-    padding: 2em;
-    text-align: center;
-    background: rgba(0,0,0,0.4);
-    border-top: 2px solid aquamarine;
-    border-radius: 15px 15px 0 0;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.3);
-}
-
-footer h2 {
-    font-family: 'Space Mono', monospace;
-    color: aquamarine;
-    margin-bottom: 1em;
-    text-shadow: 0 0 10px aquamarine;
-}
-
-footer p {
-    margin: 0.5em 0;
-    color: #f0f0f0;
-    font-size: 1em;
-}
-
-/* Footer en Modo Oscuro */
 body.dark-mode footer {
     background: rgba(255, 255, 255, 0.05);
-    border-top: 2px solid #0ff;
-    box-shadow: 0 -5px 20px rgba(0, 255, 255, 0.3);
 }
 
-body.dark-mode footer h2 {
+body.dark-mode .sidebar {
+    background: rgba(255, 255, 255, 0.05);
+    border-right: 2px solid #0ff;
+}
+
+body.dark-mode .sidebar-toggle {
     color: #0ff;
-    text-shadow: 0 0 10px #0ff, 0 0 20px #09f;
 }
 
-body.dark-mode footer p {
-    color: #dcdcdc;
+body.dark-mode .sidebar ul li a {
+    color: #0ff;
+}
+
+body.dark-mode .sidebar ul li a:hover {
+    background: rgba(0, 255, 255, 0.12);
+    color: #fff;
+    text-shadow: 0 0 10px #0ff;
+}
+
+body.dark-mode .sidebar #toggle-theme {
+    background: rgba(255, 255, 255, 0.1);
+    color: #0ff;
+    box-shadow: 0 0 15px #0ff;
+}
+
+/* ======================= */
+/* Responsive              */
+/* ======================= */
+@media (max-width: 900px) {
+
+    /* desactivar hover en móvil (se usa el botón flecha) */
+    .sidebar:hover {
+        width: 60px;
+    }
 }
