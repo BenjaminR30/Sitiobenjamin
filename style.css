@@ -57,6 +57,17 @@ h3 {
     text-align: center;
 }
 
+/* Subtítulo */
+.subtitulo {
+    font-family: 'Space Mono', monospace;
+    color: aquamarine;
+    text-align: center;
+    font-size: 1.4em;
+    margin-top: -0.5em;
+    margin-bottom: 1em;
+    animation: glowText 2s infinite alternate;
+}
+
 /* ======================= */
 /* Layout general          */
 /* ======================= */
@@ -88,7 +99,6 @@ header {
     left: 0;
     height: 100dvh;
     width: 60px;
-    /* contraída */
     background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(8px);
     border-right: 2px solid aquamarine;
@@ -157,13 +167,12 @@ header {
     text-shadow: 0 0 10px aquamarine;
 }
 
-/* Expansión de sidebar */
+/* Expansión */
 .sidebar:hover,
 .sidebar.expanded {
     width: 200px;
 }
 
-/* Empujar contenido al expandir */
 body:has(.sidebar:hover) header,
 body:has(.sidebar:hover) #container,
 body:has(.sidebar:hover) footer,
@@ -173,9 +182,7 @@ body:has(.sidebar.expanded) footer {
     margin-left: var(--sidebar-expanded);
 }
 
-/* ======================= */
-/* Botón modo oscuro (en navbar) */
-/* ======================= */
+/* Botón modo oscuro */
 .sidebar #toggle-theme {
     margin: 2em auto;
     padding: 10px 15px;
@@ -202,11 +209,8 @@ body:has(.sidebar.expanded) footer {
 /* ======================= */
 .portada {
     width: calc(100% - 4em);
-    /* ajusta al padding del body */
     max-width: 1200px;
-    /* límite opcional */
     height: 280px;
-    /* más bajo para que no sea gigante */
     margin-left: var(--sidebar-collapsed);
     transition: margin-left 0.3s ease;
     overflow: hidden;
@@ -245,7 +249,7 @@ body:has(.sidebar.expanded) .portada {
     object-fit: cover;
 }
 
-/* Controles del carrusel */
+/* Controles */
 .prev,
 .next {
     position: absolute;
@@ -381,7 +385,6 @@ body:has(.sidebar.expanded) .portada {
     width: 100%;
 }
 
-/* Tarjeta base */
 .tarjeta {
     position: relative;
     overflow: hidden;
@@ -392,7 +395,6 @@ body:has(.sidebar.expanded) .portada {
     animation: tarjetaGradient 10s ease-in-out infinite alternate;
 }
 
-/* Enlace ocupa toda la tarjeta (sin subrayado azul) */
 .tarjeta a {
     display: block;
     width: 100%;
@@ -403,7 +405,6 @@ body:has(.sidebar.expanded) .portada {
     z-index: 2;
 }
 
-/* Overlay NO bloquea clics */
 .tarjeta::after {
     content: "Ver proyecto";
     position: absolute;
@@ -453,7 +454,6 @@ body:has(.sidebar.expanded) .portada {
     box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3), 0 0 15px aquamarine;
 }
 
-/* Aparición por scroll */
 .animate {
     opacity: 0;
     transform: translateY(30px);
@@ -503,7 +503,7 @@ h1 {
 }
 
 /* ======================= */
-/* Sección Sobre mí        */
+/* Sobre mí                */
 /* ======================= */
 .sobre-mi {
     max-width: 800px;
@@ -524,6 +524,17 @@ h1 {
 .sobre-mi p {
     font-size: 1.1em;
     margin-bottom: 1em;
+}
+
+/* Foto redonda */
+.foto-perfil {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid aquamarine;
+    margin-bottom: 1em;
+    box-shadow: 0 0 15px rgba(127, 255, 212, 0.6);
 }
 
 /* ======================= */
@@ -547,6 +558,19 @@ footer h2 {
 
 footer p {
     margin: 0.5em 0;
+}
+
+/* Links en contacto */
+footer a {
+    color: aquamarine;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+footer a:hover {
+    color: white;
+    text-shadow: 0 0 10px aquamarine;
 }
 
 /* ======================= */
@@ -592,10 +616,7 @@ body.dark-mode .tarjeta {
     box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
 }
 
-body.dark-mode .sobre-mi {
-    background: rgba(255, 255, 255, 0.05);
-}
-
+body.dark-mode .sobre-mi,
 body.dark-mode footer {
     background: rgba(255, 255, 255, 0.05);
 }
@@ -626,10 +647,8 @@ body.dark-mode .sidebar #toggle-theme {
 }
 
 /* ======================= */
-/* Responsive mejorado     */
+/* Responsive              */
 /* ======================= */
-
-/* Tablets */
 @media (max-width: 1024px) {
     .portada {
         height: 250px;
@@ -650,7 +669,6 @@ body.dark-mode .sidebar #toggle-theme {
     }
 }
 
-/* Celulares grandes */
 @media (max-width: 768px) {
     body {
         padding: 1.5em;
@@ -706,7 +724,6 @@ body.dark-mode .sidebar #toggle-theme {
     }
 }
 
-/* Celulares pequeños */
 @media (max-width: 480px) {
     h1 {
         font-size: 1.4em;
@@ -736,4 +753,17 @@ body.dark-mode .sidebar #toggle-theme {
         margin: 0.5em;
         padding: 8px;
     }
+}
+
+/* ======================= */
+/* Fondo interactivo       */
+/* ======================= */
+#bg-circles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: transparent;
 }

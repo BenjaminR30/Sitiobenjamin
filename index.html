@@ -9,6 +9,8 @@
 </head>
 
 <body>
+    <!-- Fondo interactivo -->
+    <canvas id="bg-circles"></canvas>
 
     <!-- Barra de navegación lateral -->
     <nav class="sidebar">
@@ -53,6 +55,7 @@
     <!-- Encabezado -->
     <header id="inicio">
         <h1 class="animate">Repositorio Benjamin Ramirez IE 2025</h1>
+        <h2 class="subtitulo animate">Descripción de la asignatura</h2>
     </header>
 
     <!-- Contenedor principal -->
@@ -110,28 +113,28 @@
                 </div>
 
                 <div class="tarjeta animate">
-                    <a href="#" target="_blank">
+                    <a href="#">
                         <img src="assets/imagen5.jpeg" alt="Tarea 5">
                         <h3>Tarea 5</h3>
                     </a>
                 </div>
 
                 <div class="tarjeta animate">
-                    <a href="#" target="_blank">
+                    <a href="#">
                         <img src="assets/imagen6.jpg" alt="Tarea 6">
                         <h3>Tarea 6</h3>
                     </a>
                 </div>
 
                 <div class="tarjeta animate">
-                    <a href="#" target="_blank">
+                    <a href="#">
                         <img src="assets/imagen7.jpg" alt="Tarea 7">
                         <h3>Tarea 7</h3>
                     </a>
                 </div>
 
                 <div class="tarjeta animate">
-                    <a href="#" target="_blank">
+                    <a href="#">
                         <img src="assets/imagen8.jpg" alt="Tarea 8">
                         <h3>Tarea 8</h3>
                     </a>
@@ -142,34 +145,44 @@
         <!-- Sobre mí -->
         <section class="sobre-mi animate" id="sobre-mi">
             <h2>Sobre mí</h2>
+
+            <!-- Foto redonda -->
+            <img src="assets/benjamin.jpg" alt="Foto de Benjamin Ramirez" class="foto-perfil">
+
             <p>
-                Soy <strong>Benjamin Ramirez</strong>, estudiante de diseño en la <strong>Pontificia Universidad
-                    Catolica de Valparaiso</strong> y creador
-                de este sitio web. Ingrese a la carrera en el año <strong>2023.</strong> En este sitio web encontraras
-                arte generativo con
-                p5.js.
+                Soy <strong>Benjamin Ramirez</strong>, estudiante de diseño en la
+                <strong>Pontificia Universidad Catolica de Valparaiso</strong> y creador
+                de este sitio web. Ingrese a la carrera en el año <strong>2023.</strong>
+                En este sitio web encontrarás arte generativo con p5.js.
             </p>
             <p>
                 Este espacio está pensado para compartir mis proyectos, experimentos y avances dentro del curso Imagen
                 Escrita, además de servir como portafolio personal.
             </p>
             <p>
-                Si quieres comunicarte conmigo te dejare mi contacto en la siguiente seccion.
-
+                Si quieres comunicarte conmigo te dejare mi contacto en la siguiente sección.
             </p>
-
         </section>
     </div>
 
     <!-- Footer -->
     <footer id="contacto">
         <h2>Contacto</h2>
+        <p>Benjamin Ramirez Herrera</p>
+        <p><strong>Pontificia Universidad Catolica de Valparaiso</strong></p>
 
-        <p><strong>Email:</strong> benjamin.ramirez.h@mail.pucv.com</p>
+        <p><strong>Email:</strong>
+            <a href="mailto:benjamin.ramirez.h@mail.pucv.cl">benjamin.ramirez.h@mail.pucv.cl</a>
+        </p>
+        <p>
+            También puedes visitar mi
+            <a href="https://wiki.ead.pucv.cl/Benjamin_Ramirez_Herrera" target="_blank">Wiki Personal</a>.
+        </p>
     </footer>
 
     <!-- Vincular JS -->
     <script src="script.js"></script>
+    <script src="circles.js"></script>
 </body>
 
 </html>
